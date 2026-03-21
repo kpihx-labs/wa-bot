@@ -2,6 +2,9 @@ stages:
   - deploy
   - sync
 
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e auth_info/
+
 deploy_homelab:
   stage: deploy
   tags:
