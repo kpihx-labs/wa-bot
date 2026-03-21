@@ -18,9 +18,9 @@ const THROTTLE_SEC = parseInt(process.env.THROTTLE_SEC || "1", 10);
 const THROTTLE_MS = THROTTLE_SEC * 1000;
 
 // On prépare la liste blanche depuis le .env
-const RAW_ALLOWED = process.env.ALLOWED_IDS || "";
+const RAW_ALLOWED = process.env.WHATSAPP_CHAT_IDS || "";
 // On nettoie les IDs du .env pour être sûr qu'ils sont au bon format
-const ALLOWED_IDS = RAW_ALLOWED.split(',').map(id => jidNormalizedUser(id.trim())).filter(id => id.length > 0);
+const WHATSAPP_CHAT_IDS = RAW_ALLOWED.split(',').map(id => jidNormalizedUser(id.trim())).filter(id => id.length > 0);
 
 const lastAll = new Map();
 const processed = new Set();
@@ -67,7 +67,7 @@ async function start() {
       // On récupère le VRAI ID du bot connecté (Ex: 33612345678@s.whatsapp.net)
       const botId = jidNormalizedUser(sock.user.id);
       console.log(`✅ Connecté en tant que : ${botId}`);
-      console.log(`🛡️ Whitelist (.env) : ${ALLOWED_IDS.join(', ')}`);
+        console.log(`🛡️ Whitelist (.env) : ${WHATSAPP_CHAT_IDS.join(', ')}`);
 
       if (presenceInterval) clearInterval(presenceInterval);
       presenceInterval = setInterval(() => {
@@ -109,7 +109,7 @@ async function start() {
     const isMe = (author === botMe);
     
     // Est-ce que l'auteur est dans la liste blanche ?
-    const isWhitelisted = ALLOWED_IDS.includes(author);
+      const isWhitelisted = WHATSAPP_CHAT_IDS.includes(author);
 
     // Verdict : Autorisé ou pas ?
     const isAuthorized = isMe || isWhitelisted;

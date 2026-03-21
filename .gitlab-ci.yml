@@ -12,7 +12,7 @@ deploy_homelab:
     - echo "🚀 Démarrage du déploiement sur le Homelab..."
     
     # 0. On recrée le fichier .env avec les secrets stockés dans GitLab
-    - echo "ALLOWED_IDS=$ALLOWED_IDS" >> .env
+      - echo "WHATSAPP_CHAT_IDS=$WHATSAPP_CHAT_IDS" >> .env
     - echo "THROTTLE_FEEDBACK=2" >> .env
     - echo "THROTTLE_FEEDBACK=0" >> .env
     

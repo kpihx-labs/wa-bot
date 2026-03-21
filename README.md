@@ -37,7 +37,7 @@ graph LR
 
 **Workflow:**
 1. The bot listens for messages starting with `#` (standard) or `#!` (force).
-2. It verifies the author against its own identity (`fromMe`) AND the `ALLOWED_IDS` whitelist defined in `.env`.
+2. It verifies the author against its own identity (`fromMe`) AND the `WHATSAPP_CHAT_IDS` whitelist defined in `.env`.
 3. It normalizes IDs to ensure compatibility between Phone Numbers and Linked Device IDs (LIDs).
 4. If authorized, it fetches group metadata, mentions all participants, and deletes the trigger message.
 
@@ -79,7 +79,7 @@ THROTTLE_SEC=2
 # Format: CountryCodePhoneNumber@s.whatsapp.net (Standard JID) or UserID@lid (Linked Device ID)
 # Multiple IDs must be separated by a comma without spaces.
 # Example: 33612345678@s.whatsapp.net,23770873475890@lid
-ALLOWED_IDS=336XXXXXXXXX@s.whatsapp.net
+  WHATSAPP_CHAT_IDS=336XXXXXXXXX@s.whatsapp.net
 ```
 
 ### 3. Build and Start
@@ -136,7 +136,7 @@ In any WhatsApp group where you (or the bot account) are a member:
     1. Check logs: `docker logs -f wa-bot`.
     2. Look for the line: `📩 Commande reçue de [12345...@lid]`.
     3. Copy this ID.
-    4. Add it to `ALLOWED_IDS` in your `.env` file (comma-separated).
+    4. Add it to `WHATSAPP_CHAT_IDS` in your `.env` file (comma-separated).
     5. Restart: `docker compose up -d`.
 
 ### "npm install" fails during build
